@@ -1,4 +1,7 @@
 ---
+- name: Python Requirements
+  yum: name=libselinux-python state=installed
+
 - name: Copy the NGINX repository definition
   copy: src=nginx.repo dest=/etc/yum.repos.d/
 
@@ -25,3 +28,9 @@
 - name: install firewalld
   yum: name=firewalld state=installed
   when: rpm_check_firewalld.stdout.find('is not installed') != -1
+
+- name: Enable firewalld
+  command: systemctl enable firewalld
+
+- name: Start firewalld
+  command: systemctl start firewalld

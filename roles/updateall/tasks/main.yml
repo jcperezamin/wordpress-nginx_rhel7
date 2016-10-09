@@ -1,7 +1,9 @@
 ---
-- name: Upgrade to PHP56 in RedHat-based machines
-  yum: name=php enablerepo=remi-php56 state=latest
+- name: Selinux disable
+  copy: src=config dest=/etc/selinux
+
+#- name: Upgrade to PHP56 in RedHat-based machines
+#  yum: name=php enablerepo=remi-php56 state=latest
 
 - name: Reboot server
   command: /sbin/reboot
-    
